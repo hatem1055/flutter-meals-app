@@ -16,7 +16,7 @@ class MainDrawer extends StatelessWidget {
             fontWeight: FontWeight.bold),
       ),
       onTap: () {
-          Navigator.of(ctx).pushNamed(route);
+          Navigator.of(ctx).popAndPushNamed(route);
         },
     );
   }
