@@ -5,15 +5,22 @@ import 'package:meals_app/screens/tabs-screen/drawer.dart';
 
 
 class TabsScreen extends StatefulWidget {
+  final List faveroutMeals;
+  TabsScreen(this.faveroutMeals);
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, dynamic>> pages = [
+  List<Map<String, dynamic>> pages;
+  @override
+  void initState(){
+    pages = [
     {'widget': CategoriesScreen(), 'title': 'Categories'} ,
-    {'widget': Favourits(), 'title': 'Favorites'}
+    {'widget': Favourits(widget.faveroutMeals), 'title': 'Favorites'}
   ];
+    super.initState();
+  }
   int selectedPageIndex = 0;
   void selectPage(index) {
     setState(() {

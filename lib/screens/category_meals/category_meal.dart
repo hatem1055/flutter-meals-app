@@ -4,13 +4,9 @@ import '../meal_deatails/meal_details_main.dart';
 
 class CategoryMeal extends StatelessWidget {
   final Meal meal;
-  final Function removeItem;
-  CategoryMeal(this.meal,this.removeItem);
+  CategoryMeal(this.meal);
   void selectMeal(BuildContext ctx) async{
-    final value = await Navigator.of(ctx).pushNamed(MealDetailsMain.routName,arguments: meal);
-    if(value != null){
-      removeItem(value);
-    }
+    Navigator.of(ctx).pushNamed(MealDetailsMain.routName,arguments: meal);
   }
 
   String get complexityText {

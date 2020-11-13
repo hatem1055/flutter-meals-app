@@ -3,6 +3,11 @@ import '../../models/meal.dart';
 
 class MealDetailsMain extends StatelessWidget {
   static const routName = '/meal-details';
+  final Function toggleFav;
+  final Function isFav;
+
+  MealDetailsMain(this.toggleFav, this.isFav);
+
   @override
   Widget build(BuildContext context) {
     final meal = ModalRoute.of(context).settings.arguments as Meal;
@@ -36,9 +41,12 @@ class MealDetailsMain extends StatelessWidget {
         title: Text(meal.title),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: (){
-          Navigator.of(context).pop(meal.id);
+        child: Icon(
+          Icons.favorite,
+          color: isFav(meal.id) ? Colors.red : Colors.white,
+        ),
+        onPressed: () {
+          toggleFav(meal.id);
         },
       ),
       body: SingleChildScrollView(
@@ -52,7 +60,8 @@ class MealDetailsMain extends StatelessWidget {
             ),
           ),
           buildTitle('Ingrediatns'),
-          buildContainer(child:ListView.builder(
+          buildContainer(
+              child: ListView.builder(
             itemBuilder: (ctx, index) {
               return Card(
                 color: Theme.of(context).accentColor,
@@ -65,20 +74,23 @@ class MealDetailsMain extends StatelessWidget {
             itemCount: meal.ingredients.length,
           )),
           buildTitle('Steps'),
-          buildContainer(child: ListView.builder(itemBuilder: (ctx,index){
-            return Column(
-              children: [
-                ListTile(
-                  leading: CircleAvatar(child: Text('# ${index + 1}'),),
-                  title: Text(meal.steps[index]),
-                ),
-                Divider()
-              ],
-            );
-          },
-          itemCount: meal.steps.length,
-          )
-        )
+          buildContainer(
+              child: ListView.builder(
+            itemBuilder: (ctx, index) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('# ${index + 1}'),
+                    ),
+                    title: Text(meal.steps[index]),
+                  ),
+                  Divider()
+                ],
+              );
+            },
+            itemCount: meal.steps.length,
+          ))
         ]),
       ),
     );

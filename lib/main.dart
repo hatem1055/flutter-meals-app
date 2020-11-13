@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
     'isVegan': false,
   };
   List<Meal> availableMeals = meals;
+  List<Meal> faveroutMeals = [];
   void setFilter(filterData) {
     setState(() {
       filters = filterData;
@@ -47,6 +48,23 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void toggleFavourite(String id) {
+    final existingIndex = faveroutMeals.indexWhere((meal) => meal.id == id);
+    if (existingIndex >= 0) {
+      setState(() {
+        faveroutMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        faveroutMeals.add(meals.firstWhere((meal) => meal.id == id));
+      });
+    }
+  }
+
+  bool isFavourite(id){
+    return faveroutMeals.any((meal) => meal.id == id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,11 +83,11 @@ class _MyAppState extends State<MyApp> {
                   fontWeight: FontWeight.bold))),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => TabsScreen(),
+        '/': (ctx) => TabsScreen(faveroutMeals),
         CategoryMealsScreen.routName: (ctx) =>
             CategoryMealsScreen(availableMeals),
-        MealDetailsMain.routName: (ctx) => MealDetailsMain(),
-        Settings.routeName: (ctx) => Settings(setFilter,filters)
+        MealDetailsMain.routName: (ctx) => MealDetailsMain(toggleFavourite,isFavourite),
+        Settings.routeName: (ctx) => Settings(setFilter, filters)
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (_) => CategoriesScreen());

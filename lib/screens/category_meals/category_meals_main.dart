@@ -24,11 +24,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     super.didChangeDependencies();
   }
 
-  void removeItem(String id) {
-    setState(() {
-      categoryMeals.removeWhere((element) => element.id == id);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +34,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         body: Center(
           child: ListView.builder(
             itemBuilder: (ctx, index) {
-              return CategoryMeal(categoryMeals[index], removeItem);
+              return CategoryMeal(categoryMeals[index]);
             },
             itemCount: categoryMeals.length,
           ),
