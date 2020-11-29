@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
         CategoryMealsScreen.routName: (ctx) =>
             CategoryMealsScreen(availableMeals),
         MealDetailsMain.routName: (ctx) =>
-            MealDetailsMain(toggleFavourite, isFavourite),
+            MealDetailsMain(toggleFavourite, isFavourite), 
         Settings.routeName: (ctx) => Settings(setFilter, filters) 
       },
       onUnknownRoute: (settings) {
