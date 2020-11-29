@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  bool isFavourite(id){
+  bool isFavourite(id) {
     return faveroutMeals.any((meal) => meal.id == id);
   }
 
@@ -86,7 +86,8 @@ class _MyAppState extends State<MyApp> {
         '/': (ctx) => TabsScreen(faveroutMeals),
         CategoryMealsScreen.routName: (ctx) =>
             CategoryMealsScreen(availableMeals),
-        MealDetailsMain.routName: (ctx) => MealDetailsMain(toggleFavourite,isFavourite),
+        MealDetailsMain.routName: (ctx) =>
+            MealDetailsMain(toggleFavourite, isFavourite),
         Settings.routeName: (ctx) => Settings(setFilter, filters)
       },
       onUnknownRoute: (settings) {
