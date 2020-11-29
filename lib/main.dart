@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
             CategoryMealsScreen(availableMeals),
         MealDetailsMain.routName: (ctx) =>
             MealDetailsMain(toggleFavourite, isFavourite),
-        Settings.routeName: (ctx) => Settings(setFilter, filters)
+        Settings.routeName: (ctx) => Settings(setFilter, filters) 
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (_) => CategoriesScreen());
